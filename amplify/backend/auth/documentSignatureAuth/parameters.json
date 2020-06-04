@@ -1,4 +1,6 @@
 {
+    "identityPoolName": "documentSignatureAuth_identitypool_590a5dd2",
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "docume387610e9",
     "userPoolName": "document_signature_user_pool",
     "autoVerifiedAttributes": [
@@ -29,7 +31,7 @@
     "userpoolClientLambdaRole": "docume387610e9_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "useDefault": "manual",
-    "authSelections": "userPoolOnly",
+    "authSelections": "identityPoolAndUserPool",
     "resourceName": "documentSignatureAuth",
     "usernameAttributes": [
         "email, phone_number"

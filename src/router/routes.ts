@@ -42,6 +42,18 @@ const routes: RouteConfig[] = [
       }
     ]
   },
+
+
+  {
+    path: '/user',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: ':userId',
+        component: () => import('pages/User.vue')
+      }
+    ]
+  },
 ]
 
 // Always leave this as last one
