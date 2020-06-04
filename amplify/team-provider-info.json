@@ -1,0 +1,22 @@
+{
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-documentsignature-develop-95633-authRole",
+            "UnauthRoleArn": "arn:aws:iam::848492350754:role/amplify-documentsignature-develop-95633-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::848492350754:role/amplify-documentsignature-develop-95633-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-documentsignature-develop-95633-deployment",
+            "UnauthRoleName": "amplify-documentsignature-develop-95633-unauthRole",
+            "StackName": "amplify-documentsignature-develop-95633",
+            "StackId": "arn:aws:cloudformation:us-east-1:848492350754:stack/amplify-documentsignature-develop-95633/038353c0-a60f-11ea-98c2-12505ef78976",
+            "AmplifyAppId": "d1ecayeupbhtw8"
+        },
+        "categories": {
+            "auth": {
+                "documentSignatureAuth": {
+                    "hostedUIProviderCreds": "[]"
+                }
+            }
+        }
+    }
+}

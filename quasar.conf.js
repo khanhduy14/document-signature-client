@@ -105,7 +105,12 @@ module.exports = configure(function (ctx) {
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
 
-      components: [],
+      components: [
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd'
+      ],
       directives: [],
 
       // Quasar plugins

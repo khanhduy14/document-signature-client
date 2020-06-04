@@ -2,3 +2,8 @@
 /src-bex/www
 /src-capacitor
 /src-cordova
+/node_modules/aws-amplify/lib/*.ts
+/amplify
+/node_modules
+src/aws-exports.js
+src
