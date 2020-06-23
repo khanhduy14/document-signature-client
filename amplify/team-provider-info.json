@@ -18,5 +18,26 @@
                 }
             }
         }
+    },
+    "staging": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-documentsignature-staging-150434-authRole",
+            "UnauthRoleArn": "arn:aws:iam::848492350754:role/amplify-documentsignature-staging-150434-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::848492350754:role/amplify-documentsignature-staging-150434-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-documentsignature-staging-150434-deployment",
+            "UnauthRoleName": "amplify-documentsignature-staging-150434-unauthRole",
+            "StackName": "amplify-documentsignature-staging-150434",
+            "StackId": "arn:aws:cloudformation:us-east-1:848492350754:stack/amplify-documentsignature-staging-150434/34c2bee0-a703-11ea-b082-0e65f7e0e97d",
+            "AmplifyAppId": "d1ecayeupbhtw8"
+        },
+        "categories": {
+            "auth": {
+                "userPoolGroups": {},
+                "documentSignatureAuth": {
+                    "hostedUIProviderCreds": "[]"
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 {
     "identityPoolName": "documentSignatureAuth_identitypool_590a5dd2",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "docume387610e9",
     "userPoolName": "document_signature_user_pool",
     "autoVerifiedAttributes": [

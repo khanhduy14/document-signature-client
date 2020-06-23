@@ -12,7 +12,7 @@
       <template v-slot:top-right>
         <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
           <template v-slot:append>
-            <q-icon name="search" />
+            <q-icon name="search"/>
           </template>
         </q-input>
       </template>
@@ -21,89 +21,70 @@
 </template>
 
 <script>
+
+  import DocumentService from '../../service/DocumentService'
+  import UserService from '../../service/UserService'
+
   export default {
     name: 'MainBoard',
     data () {
       return {
-        filter: '',
+        documentList: null,
+        filter: null,
         columns: [
           {
             name: 'desc',
             required: true,
-            label: 'Dessert (100g serving)',
+            label: 'No',
             align: 'left',
-            field: row => row.name,
+            field: row => row.index,
             format: val => `${val}`,
             sortable: true
           },
-          { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
-          { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-          { name: 'carbs', label: 'Carbs (g)', field: 'carbs' }
+          {
+            name: 'registerDate',
+            align: 'center',
+            label: 'Register Date',
+            field: 'registerDate',
+            sortable: true
+          },
+          {
+            name: 'Owner',
+            label: 'Owner',
+            field: 'owner',
+            sortable: true
+          },
+          {
+            name: 'Signature Status',
+            label: 'Signature Status',
+            field: 'verify_status',
+            sortable: true
+          }
         ],
         data: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65
-          }
         ]
       }
-    }
+    },
+
+    methods: {
+      async fetchData() {
+        try {
+          this.documentList = await DocumentService.getDocument(this.filter)
+          this.data = this.documentList.data
+          this.data.forEach(el => {
+            console.log(el)
+            const user = UserService.getUser(el.owner)
+          })
+
+        } catch (ex){
+          console.error(ex)
+        }
+      }
+    },
+
+    async created () {
+      await this.fetchData();
+    },
   }
 </script>
 

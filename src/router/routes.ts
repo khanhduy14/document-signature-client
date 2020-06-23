@@ -11,6 +11,32 @@ const routes: RouteConfig[] = [
   },
 
   {
+    path: '/',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      // For Guest
+      {
+        path: '',
+        components: {
+          default: () => import('pages/Index.vue'),
+        },
+      },
+      // For Login User
+      {
+        path: 'user',
+        meta: { requiresAuth: true },
+        components: {
+          default: () => import('pages/Index.vue'),
+        },
+        children: [
+          { path: '', component: () => import('pages/User.vue')},
+          { path: 'main-board', component: () => import('pages/MainBoardPage.vue')}
+        ]
+      },
+    ]
+  },
+
+  {
     path: '/auth',
     component: () => import('layouts/NoDrawer.vue'),
     children: [
@@ -39,18 +65,6 @@ const routes: RouteConfig[] = [
             meta: { title: 'パスワード復旧', description: 'パスワードをお忘れになった方へ' }
           }
         ]
-      }
-    ]
-  },
-
-
-  {
-    path: '/user',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      {
-        path: ':userId',
-        component: () => import('pages/User.vue')
       }
     ]
   },

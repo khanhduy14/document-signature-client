@@ -13,6 +13,9 @@
     name: 'User',
     components : {
       'upload-document' : UploadDocument
+    },
+    async created () {
+
     }
   }
 </script>

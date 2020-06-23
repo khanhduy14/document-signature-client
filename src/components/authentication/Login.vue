@@ -78,8 +78,89 @@
 </template>
 
 <script>
+  import StringUtils from '../../utils/StringUtils'
+
   export default {
-    name: 'Login'
+    name: 'Login',
+    data () {
+      return {
+        username : '',
+        password : '',
+        isRememberMe : false,
+
+        isLoading : false,
+        selectedRoleIndex: null
+      }
+    },
+
+    methods : {
+      async submitForm () {
+        this.isLoading = true ;
+        const self = this;
+        try {
+          this.loginUserWithEmail(this.username, this.password)
+            .then(async (res) => {
+              self.$store.commit('users/jwtUpdate', res.jwt)
+              // self.$store.commit('users/usernameUpdate', res.payload)
+              if (!this.isRememberMe) {
+                document.cookie = `jwt=${res.jwt}; max-age=${60*60*12}` //12Hour
+              } else {
+                document.cookie = `jwt=${res.jwt}; max-age=${60*60*24*7}` //1Week
+              }
+            }).then(() => {
+            // self.$store.dispatch({
+            //   type: 'users/getNotificationList'
+            // });
+            // self.$store.dispatch({
+            //   type: 'users/getUserAvatar'
+            // });
+          })
+            .catch((e)=>{
+              if (e.message === 'User does not exist.') {
+                this.$notify('error', 'ユーザー名またはパスワードが正しくありません')
+              } else if (e.message === 'Incorrect username or password.') {
+                this.$notify('error', 'ユーザー名またはパスワードが正しくありません')
+              } else if (e.code == 'UserNotConfirmedException'){
+                this.$notify('error', 'ユーザー確認が完了していません')
+              } else {
+                this.$notify('error', 'ログインが失敗しました')
+              }
+              console.log('Login error', e.message)
+            })
+        } finally {
+          this.isLoading = false
+        }
+      },
+
+      async loginWithAuthProvidor() {
+
+      },
+
+      isValidEmail (val) {
+        return StringUtils.isEmailValid(val);
+      },
+
+      async loginWithAuthProvidor () {
+        this.$Auth.federatedSignIn({ provider: 'Google' })
+      },
+      async loginUserWithEmail (email, password) {
+        const user = await this.$Auth.signIn(email, password);
+        const provider = user.signInUserSession.idToken.payload.identities ?
+          user.signInUserSession.idToken.payload.identities[0].providerType : '';
+        // this.$store.commit('users/userProviderUpdate', provider);
+        // this.$store.commit('users/groupUpdate', user.signInUserSession.accessToken.payload['cognito:groups']);
+        // this.$store.commit('users/userNameUpdate', user.username);
+        const jwt = await user.signInUserSession.idToken.jwtToken
+        return {jwt}
+      }
+
+    },
+
+    watch : {
+      isRememberMe : function (val) {
+        localStorage.setItem('rememberMe', val);
+      }
+    }
   }
 </script>
 

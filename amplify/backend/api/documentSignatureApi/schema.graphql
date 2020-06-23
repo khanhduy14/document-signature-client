@@ -1,4 +1,4 @@
-type User @model @searchable @auth(rules: [
+type User @model @auth(rules: [
   # Admin users can access any operation.
   { allow: groups, groups: ["Admin", "User"], operations: [read, create, update, delete] },
   # Allow user to any operation.
@@ -27,6 +27,14 @@ type Document @model @searchable @auth(rules: [
   id: ID!
   owner: String @auth(rules: [{allow: owner}])
   storage_key: String
+  verify_status: Boolean
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type Mytype @model
+{
+  id: ID!
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
 }
